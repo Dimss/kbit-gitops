@@ -6,9 +6,14 @@ metadata:
     app: sonarqube
   name: sonarqube
 spec:
+  host: ""
   to:
     kind: Service
     name: sonarqube
+    weight: 100
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
+status:
+  ingress:
+   - conditions:
