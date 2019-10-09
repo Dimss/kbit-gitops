@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: {{ .Values.serviceName }}
+spec:
+  host: ""
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: {{ .Values.serviceName }}
+status:
+  ingress:
+    - conditions:

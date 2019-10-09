@@ -1,0 +1,95 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: "true"
+  name: {{ .Values.serviceName }}
+spec:
+  replicas: 1
+  selector:
+    name: {{ .Values.serviceName }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.serviceName }}
+    spec:
+      initContainers:
+        - name: sonar-init-config
+          image: dimssss/sonar-init:0.3
+          env:
+            - name: SONAR_UI_URL
+              value: {{ .Values.sonarUiUrl }}
+            - name: BC_SYNC_TARGET_NS
+              value: {{ .Values.bcSyncTragetNs }}
+          volumeMounts:
+            - mountPath: /var/lib/jenkins
+              name: jenkins-data
+      containers:
+        - capabilities: {}
+          env:
+            - name: OPENSHIFT_ENABLE_OAUTH
+              value: "{{ .Values.enableAuth }}"
+            - name: OPENSHIFT_ENABLE_REDIRECT_PROMPT
+              value: "true"
+            - name: DISABLE_ADMINISTRATIVE_MONITORS
+              value: "{{ .Values.disableAdministrativeMonitors }}"
+            - name: KUBERNETES_MASTER
+              value: https://kubernetes.default:443
+            - name: KUBERNETES_TRUST_CERTIFICATES
+              value: "true"
+            - name: JENKINS_SERVICE_NAME
+              value: {{ .Values.serviceName }}
+            - name: JNLP_SERVICE_NAME
+              value: {{ .Values.jnlpServiceName }}
+            - name: JENKINS_UC_INSECURE
+              value: "{{ .Values.jenkinsUcInsecure }}"
+            - name: INSTALL_PLUGINS
+              value: {{ .Values.installPlugins }}
+          image: ' '
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 420
+            periodSeconds: 360
+            timeoutSeconds: 240
+          name: jenkins
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 3
+            timeoutSeconds: 240
+          resources:
+            limits:
+              memory: {{ .Values.memoryLimit }}
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+            - mountPath: /var/lib/jenkins
+              name: {{ .Values.serviceName }}-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      serviceAccountName: {{ .Values.serviceName }}
+      volumes:
+        - emptyDir:
+            medium: ""
+          name: {{ .Values.serviceName }}-data
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - jenkins
+        from:
+          kind: ImageStreamTag
+          name: {{ .Values.jenkinsImageStreamTag }}
+          namespace: {{ .Values.namespace }}
+        lastTriggeredImage: ""
+      type: ImageChange
+    - type: ConfigChange
