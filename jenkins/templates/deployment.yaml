@@ -27,7 +27,6 @@ spec:
             - mountPath: /var/lib/jenkins
               name: jenkins-data
       containers:
-        - capabilities: {}
           env:
             - name: OPENSHIFT_ENABLE_OAUTH
               value: "{{ .Values.enableAuth }}"
