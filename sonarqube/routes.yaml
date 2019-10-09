@@ -6,7 +6,7 @@ metadata:
     app: sonarqube
   name: sonarqube
 spec:
-  host: "sonarqube-flux.apps.elbit.kbit.ocplab.io"
+  host: sonarqube-flux.apps.elbit.kbit.ocplab.io
   to:
     kind: Service
     name: sonarqube
@@ -14,3 +14,6 @@ spec:
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
+status:
+  ingress:
+   - conditions:
