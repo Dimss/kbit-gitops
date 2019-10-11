@@ -5,14 +5,11 @@ metadata:
     app: sonarqube
   name: sonarqube
 spec:
-  host: sonarqube-flux.apps.elbit.kbit.ocplab.io
+  host: sonarqube-kbit-devops-test.apps.elbit.kbit.ocplab.io
   to:
     kind: Service
     name: sonarqube
     weight: 100
-  tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
 status:
   ingress:
    - conditions:
