@@ -1,0 +1,13 @@
+dependencies:
+- name: ocp-project
+  version: 0.1.0
+  repository: "file://../ocp-project/"
+- name: jenkins
+  version: 0.1.0
+  repository: "file://../jenkins/"
+- name: sonarqube
+  version: 0.1.0
+  repository: "file://../sonarqube/"
+- name: report-server
+  version: 0.1.0
+  repository: "file://../report-server/"

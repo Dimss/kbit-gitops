@@ -1,0 +1,15 @@
+dependencies:
+- name: ocp-project
+  repository: file://../ocp-project/
+  version: 0.1.0
+- name: jenkins
+  repository: file://../jenkins/
+  version: 0.1.0
+- name: sonarqube
+  repository: file://../sonarqube/
+  version: 0.1.0
+- name: report-server
+  repository: file://../report-server/
+  version: 0.1.0
+digest: sha256:8f4b57486c4dca12ce25c31737969fd96704172733ef1a3318818a74154e0c27
+generated: 2019-10-12T21:32:17.072458+03:00
