@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: report-nginx
 spec:
-  host: report-server.apps.elbit.kbit.ocplab.io
+  host: kbit-devops-test.apps.elbit.kbit.ocplab.io
   to:
     kind: Service
     name: report-nginx
