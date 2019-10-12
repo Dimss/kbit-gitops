@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kbit-devops-test-app
+  namespace: kbit-devops
+spec:
+  project: kbit-devops-test
+  destination:
+    namespace: kbit-devops
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: argo/projects
+    repoURL: 'git@github.com:Dimss/gitops-infra.git'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
