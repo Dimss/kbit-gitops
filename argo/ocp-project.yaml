@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ocp-project
+spec:
+  destination:
+    namespace: kbit-devops-dev
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ocp-project
+    repoURL: 'git@github.com:Dimss/kbit-gitops.git'
+    targetRevision: "dev"
+  project: kbit-devops-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
