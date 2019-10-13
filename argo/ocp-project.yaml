@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ocp-project
+  name: ocp-project-dev
   namespace: gitops-infra
 spec:
   destination:
