@@ -4,6 +4,7 @@ metadata:
   name: repot-server-test
   namespace: gitops-infra
 spec:
+  project: kbit-devops-test
   destination:
     namespace: kbit-devops-test
     server: 'https://kubernetes.default.svc'
@@ -17,7 +18,6 @@ spec:
         value: "report-server-kbit-devops-test.apps.elbit.kbit.ocplab.io"
       valueFiles:
         - values.yaml
-  project: kbit-devops-dev
   syncPolicy:
     automated:
       prune: true
