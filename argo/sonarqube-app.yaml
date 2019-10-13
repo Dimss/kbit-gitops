@@ -8,7 +8,7 @@ spec:
     namespace: kbit-devops-dev
     server: 'https://kubernetes.default.svc'
   source:
-    path: sonarqube-chart
+    path: sonarqube
     repoURL: 'git@github.com:Dimss/kbit-gitops.git'
     targetRevision: dev
     helm:
