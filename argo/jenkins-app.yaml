@@ -13,8 +13,10 @@ spec:
     targetRevision: dev
     helm:
       parameters:
-      - name: "route.host"
-        value: sonarqube-kbit-devops-test.apps.elbit.kbit.ocplab.io
+      - name: "sonarUiUrl"
+        value: "http://sonarqube-kbit-devops-test.apps.elbit.kbit.ocplab.io"
+      - name: "bcSyncTragetNs"
+        value: "kbit-devops-dev"
       valueFiles:
         - values.yaml
   project: kbit-devops-dev
