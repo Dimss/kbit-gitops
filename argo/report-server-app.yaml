@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: repot-server
+spec:
+  destination:
+    namespace: kbit-devops-dev
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: repot-server
+    repoURL: 'git@github.com:Dimss/kbit-gitops.git'
+    targetRevision: "dev"
+  project: kbit-devops-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+
+#apiVersion: argoproj.io/v1alpha1
+#metadata:
+#  name: kbit-devops-dev-app
+#spec:
+#  destination:
+#    namespace: kbit-devops-dev
+#    server: 'https://kubernetes.default.svc'
+#  source:
+#    path: helm-charts/infra
+#    repoURL: 'git@github.com:Dimss/kbit-gitops.git'
+#    targetRevision: dev
+#    helm:
+#      valueFiles:
+#        - values.yaml
+#  project: kbit-devops-dev
+#  syncPolicy:
+#    automated:
+#      prune: true
+#      selfHeal: false
+#
