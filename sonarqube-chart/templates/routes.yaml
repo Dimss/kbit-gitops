@@ -5,11 +5,11 @@ metadata:
     app: sonarqube
   name: sonarqube
 spec:
-  host: sonarqube-kbit-devops-test.apps.elbit.kbit.ocplab.io
+  host: {{ .Values.route.host }}
   to:
     kind: Service
     name: sonarqube
     weight: 100
 status:
   ingress:
-   - conditions:
+    - conditions:

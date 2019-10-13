@@ -2,15 +2,19 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: jenkins
+  namespace: gitops-infra
 spec:
   destination:
     namespace: kbit-devops-dev
     server: 'https://kubernetes.default.svc'
   source:
-    path: jenkins
+    path: jenkins-chart
     repoURL: 'git@github.com:Dimss/kbit-gitops.git'
     targetRevision: dev
     helm:
+      parameters:
+      - name: "route.host"
+        value: sonarqube-kbit-devops-test.apps.elbit.kbit.ocplab.io
       valueFiles:
         - values.yaml
   project: kbit-devops-dev
