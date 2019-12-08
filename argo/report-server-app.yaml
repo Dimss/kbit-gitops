@@ -9,7 +9,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: report-server
-    repoURL: 'git@github.com:Dimss/kbit-gitops.git'
+    repoURL: 'https://github.com/Dimss/kbit-gitops.git'
     targetRevision: "dev"
     helm:
       parameters:
